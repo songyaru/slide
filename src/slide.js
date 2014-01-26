@@ -25,8 +25,10 @@
         options: {
             index: 0,
             play: {
+                reverse: false, //反向播放
                 auto: false,
-                delay: 2000
+                pause: false,//鼠标移动到slide可以暂停自动播放
+                delay: 3000
             }
         },
 
@@ -59,6 +61,13 @@
             this.control = this._createControl();
             this.pagination = this._createPagination();
 
+            if (opts.play.auto) { //todo 放到 init 中？
+                this.play(opts.play.reverse);
+            }
+            if (this.options.play.pause) { //todo 放到 init 中？
+                this.pause();
+            }
+
             this.element.trigger("ui_create", opts);
             this.init(opts);
         },
@@ -90,16 +99,24 @@
         },
         animate: noop,
         animateDone: noop,
-        play: function (next) {
+        play: function (reverse) {
             var _this = this;
             var opts = this.options.play;
-            clearTimeout(this.autoPlayTimer);
-            this.autoPlayTimer = setTimeout(function () {
-                next ? _this.next() : _this.prev();
+            clearInterval(this.autoPlayTimer);
+            this.autoPlayTimer = setInterval(function () {
+                reverse ? _this.prev() : _this.next();
             }, opts.delay);
         },
+        pause: function () {
+            var _this = this;
+            this.container.hover(function () {
+                _this.stop();
+            }, function () {
+                _this.play(_this.options.play.reverse);
+            });
+        },
         stop: function () {
-            clearTimeout(this.autoPlayTimer);
+            clearInterval(this.autoPlayTimer);
         }
     };
 
