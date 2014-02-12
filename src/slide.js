@@ -55,7 +55,7 @@
                     if ($.isFunction(fn)) {
                         var ret = fn.call(_this, opts);
                         if (ret !== undefined) {
-                            _this[str.toLowerCase()] = fn.call(_this, opts);
+                            _this[str.toLowerCase()] = ret;
                         }
                     }
                 })

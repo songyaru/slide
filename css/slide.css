@@ -68,3 +68,7 @@
     right: -100px;
 }
 
+.control-disable{
+    display: none;
+}
+

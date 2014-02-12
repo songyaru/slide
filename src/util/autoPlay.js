@@ -4,7 +4,7 @@
  * Date: 14-2-12  上午11:11
  *
  */
-(function ($) {
+(function ($, undefined) {
     var pluginName = "slide";
     var plugin = $[pluginName];
     var pluginImpl = {
@@ -12,7 +12,7 @@
             play: {
                 reverse: false, //反向播放
                 auto: true,
-                pause: false,//鼠标移动到slide可以暂停自动播放
+                pause: true,//鼠标移动到slide可以暂停自动播放
                 delay: 3000
             }
         },
@@ -36,12 +36,10 @@
             clearInterval(this.autoPlayTimer);
         },
         _createAutoPlay: function (options) {
-            var opts=options.play;
+            var opts = options.play;
             if (opts.auto) {
                 this.play(opts.reverse);
-            }
-            if (opts.pause) {
-                this.pause();
+                opts.pause && this.pause();
             }
         }
     };

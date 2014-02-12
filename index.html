@@ -12,10 +12,10 @@
     <script type="text/javascript" src="src/pagination.js"></script>
     <script type="text/javascript" src="src/util/autoPlay.js"></script>
     <script type="text/javascript" src="src/util/animate.js"></script>
+    <script type="text/javascript" src="src/util/stopAtEdge.js"></script>
 
 </head>
 <body>
-
 
 
 <div id="slide">
@@ -25,7 +25,6 @@
         <li class="slide"><img src="imgs/bg2.jpg" alt="2"/></li>
         <li class="slide"><img src="imgs/bg3.jpg" alt="3"/></li>
     </ul>
-
 
 
     <ul id="pagination">
@@ -42,26 +41,19 @@
 </div>
 
 
-
-
-
-
-
-
 <script type="text/javascript">
     (function ($) {
 
         aa = $.slide({
 //            control: {
 //            },
-            play:{
-//                auto:false,
-                pause:true
+            play: {
+                auto: false
             },
             pagination: {
-                elem:$("#pagination")
-                ,type:"click"
-            }
+                elem: $("#pagination"), type: "click"
+            },
+            stopAtEdge: true
         }, $("#slide"));
 
 
