@@ -20,7 +20,7 @@
 
 <div id="slide">
     <ul class="slide-container">
-        <li class="slide cur"><img src="imgs/bg0.jpg" alt="0"/></li>
+        <li class="slide"><img src="imgs/bg0.jpg" alt="0"/></li>
         <li class="slide"><img src="imgs/bg1.jpg" alt="1"/></li>
         <li class="slide"><img src="imgs/bg2.jpg" alt="2"/></li>
         <li class="slide"><img src="imgs/bg3.jpg" alt="3"/></li>
@@ -45,13 +45,17 @@
     (function ($) {
 
         aa = $.slide({
-//            control: {
-//            },
+            control: {
+            },
+            slide: {
+                index: 1
+            },
             play: {
                 auto: false
             },
             pagination: {
-                elem: $("#pagination"), type: "click"
+                elem: $("#pagination"),
+                type: "click"
             },
             stopAtEdge: true
         }, $("#slide"));

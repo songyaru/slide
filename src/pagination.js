@@ -10,13 +10,14 @@
     var pluginImpl = {
         options: {
             pagination: {
+                currentClass: "cur",
                 elem: ".pagination",
                 child: "li",
                 type: "click"//"mouseover"
             }
         },
         paginationChange: function (data) {
-            this.currentPagination.removeClass("cur");
+            this.currentPagination.removeClass(this.options.pagination.currentClass);
             this._setCurrentPagination(data.index);
 
         },
@@ -25,7 +26,7 @@
         },
         _setCurrentPagination: function (i) {
             this.currentPagination = this._getPagination(i);
-            this.currentPagination.addClass("cur");
+            this.currentPagination.addClass(this.options.pagination.currentClass);
         },
 
         _createPagination: function (options) {

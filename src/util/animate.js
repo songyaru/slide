@@ -6,7 +6,6 @@
  */
 (function ($, undefined) {
     var pluginName = "slide";
-    var currentClassName = "cur";
     var vendorPrefix = (function () { //todo jquery自动加上了vendorPrefix，简化为判断是否支持css3的transition
         var body = document.body || document.documentElement,
             style = body.style;
@@ -51,6 +50,7 @@
         fade: function (direct, speed) {
             var _this = this;
             var flag = 2;
+            var currentClassName = this.options.slide.currentClass;
             this.last.fadeOut(speed, function () {
                 _this.last.removeClass(currentClassName);
                 _this._isAnimate = --flag;
@@ -69,6 +69,7 @@
             }
         },
         animateDone: function (direct) {
+            var currentClassName = this.options.slide.currentClass;
             this.container[0].style.cssText = "";//todo 默认style
             this.last.removeClass(currentClassName).hide();
             this.current.addClass(currentClassName).css("left", 0).show();

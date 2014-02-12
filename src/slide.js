@@ -23,8 +23,10 @@
 
     plugin.prototype = {
         options: {
-//            index: 0
-
+            slide: {
+                index: 0,
+                currentClass: "cur"
+            }
         },
         length: null,
         _isAnimate: false,
@@ -39,21 +41,21 @@
         },
         _getCreateOptions: noop,
         init: noop,
-        _create: function (opts) {
-            var _this = this;
+        _create: function (options) {
+            var _this = this,opts=options.slide;
             this.container = $("." + pluginName + "-container", this.element);
             this.content = $("." + pluginName, this.container);
             this.length = this.content.length;
-//            this.index = opts.index;
-            this.index = this.content.index(".cur");
+            this.index = opts.index;
             this.last = this.current = this.getItemByIndex(this.index);
+            this.current.addClass(opts.currentClass);
 
             //引入_createXXX的插件
             for (var name in this) {
                 name.replace(/^(?:_create)(\w+)/g, function (match, str) {
                     var fn = _this[match];
                     if ($.isFunction(fn)) {
-                        var ret = fn.call(_this, opts);
+                        var ret = fn.call(_this, options);
                         if (ret !== undefined) {
                             _this[str.toLowerCase()] = ret;
                         }
@@ -61,8 +63,8 @@
                 })
             }
 
-            this.element.trigger("ui_create", opts);
-            this.init(opts);
+            this.element.trigger("ui_create", options);
+            this.init(options);
         },
         getItemByIndex: function (i) {
             return this.content.eq(i);
