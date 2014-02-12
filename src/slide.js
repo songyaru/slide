@@ -16,7 +16,7 @@
         }
 
         this.element = $(elem);
-        this.options = $.extend(true, {}, this.options, this._getCreateOptions(), opts);
+        $.extend(true, this.options, this._getCreateOptions(), opts);
         this._create(this.options);
         return this;
     };
