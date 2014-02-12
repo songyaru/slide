@@ -16,17 +16,17 @@
                 type: "click"
             }
         },
-        _createControl: function () {
+        _createControl: function (options) {
             var _this = this;
-            var opts = this.options.control;
-            var ret = $();
+            var opts = options.control;
+            var ret = {};
             ret.left = $(opts.left).on(opts.type, function () {
                 _this.prev();
             });
             ret.right = $(opts.right).on(opts.type, function () {
                 _this.next();
             });
-            return   ret;
+            return ret;
         }
     };
     plugin._extend(pluginImpl);

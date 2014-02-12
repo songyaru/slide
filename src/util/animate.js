@@ -4,10 +4,6 @@
  * Date: 14-1-20  下午2:06
  *
  */
-
-
-
-
 (function ($, undefined) {
     var pluginName = "slide";
     var currentClassName = "cur";
@@ -77,12 +73,17 @@
             this.last.removeClass(currentClassName).hide();
             this.current.addClass(currentClassName).css("left", 0).show();
             this._isAnimate = false;
-            this.element.trigger("animateDone");
+            this.element.trigger("ui_animate_done");
+        },
+        _createAnimate: function (options) {
+            var _this = this;
+            this.element.on("ui_jump", function (e, data) {
+                _this.animate(data.direct)
+            })
         }
     };
 
     var plugin = $[pluginName];
-
     plugin._extend(pluginImpl);
 
 //    require.async("slide", function (plugin) {

@@ -10,6 +10,7 @@
     <script type="text/javascript" src="src/slide.js"></script>
     <script type="text/javascript" src="src/control.js"></script>
     <script type="text/javascript" src="src/pagination.js"></script>
+    <script type="text/javascript" src="src/util/autoPlay.js"></script>
     <script type="text/javascript" src="src/util/animate.js"></script>
 
 </head>
@@ -54,14 +55,14 @@
 //            control: {
 //            },
             play:{
-                auto:true,
+//                auto:false,
                 pause:true
             },
             pagination: {
                 elem:$("#pagination")
-                ,type:"mouseover"
+                ,type:"click"
             }
-        }, $("#slide")[0]);
+        }, $("#slide"));
 
 
 //        $("#slide").slide({

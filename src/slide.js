@@ -23,20 +23,10 @@
 
     plugin.prototype = {
         options: {
-            index: 0,
-            play: {
-                reverse: false, //反向播放
-                auto: false,
-                pause: false,//鼠标移动到slide可以暂停自动播放
-                delay: 3000
-            }
-        },
+//            index: 0
 
+        },
         length: null,
-        control: null,
-        _createControl: noop,
-        pagination: null,
-        _createPagination: noop,
         _isAnimate: false,
         last: null,
         current: null,
@@ -50,22 +40,25 @@
         _getCreateOptions: noop,
         init: noop,
         _create: function (opts) {
+            var _this = this;
             this.container = $("." + pluginName + "-container", this.element);
             this.content = $("." + pluginName, this.container);
-            this.length = this.content.size();
+            this.length = this.content.length;
 //            this.index = opts.index;
             this.index = this.content.index(".cur");
             this.last = this.current = this.getItemByIndex(this.index);
 
-
-            this.control = this._createControl();
-            this.pagination = this._createPagination();
-
-            if (opts.play.auto) { //todo 放到 init 中？
-                this.play(opts.play.reverse);
-            }
-            if (this.options.play.pause) { //todo 放到 init 中？
-                this.pause();
+            //引入_createXXX的插件
+            for (var name in this) {
+                name.replace(/^(?:_create)(\w+)/g, function (match, str) {
+                    var fn = _this[match];
+                    if ($.isFunction(fn)) {
+                        var ret = fn.call(_this, opts);
+                        if (ret !== undefined) {
+                            _this[str.toLowerCase()] = fn.call(_this, opts);
+                        }
+                    }
+                })
             }
 
             this.element.trigger("ui_create", opts);
@@ -91,32 +84,10 @@
             this.current = this.getItemByIndex(this.index);
 
             this.element.trigger("ui_jump", {
+                direct: direct,
                 lastIndex: lastIndex,
                 index: this.index
             });
-
-            this.animate(direct); //todo trigger 事件???
-        },
-        animate: noop,
-        animateDone: noop,
-        play: function (reverse) {
-            var _this = this;
-            var opts = this.options.play;
-            clearInterval(this.autoPlayTimer);
-            this.autoPlayTimer = setInterval(function () {
-                reverse ? _this.prev() : _this.next();
-            }, opts.delay);
-        },
-        pause: function () {
-            var _this = this;
-            this.container.hover(function () {
-                _this.stop();
-            }, function () {
-                _this.play(_this.options.play.reverse);
-            });
-        },
-        stop: function () {
-            clearInterval(this.autoPlayTimer);
         }
     };
 
@@ -136,10 +107,10 @@
     };
 
 
-    if (typeof define === "function") {
-        define("slide", function () {
-            return plugin;
-        });
-    }
+//    if (typeof define === "function") {
+//        define("slide", function () {
+//            return plugin;
+//        });
+//    }
 
 })(jQuery);

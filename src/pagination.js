@@ -4,10 +4,7 @@
  * Date: 14-1-16  下午12:44
  *
  */
-
 (function ($) {
-
-
     var pluginName = "slide";
     var plugin = $[pluginName];
     var pluginImpl = {
@@ -31,10 +28,9 @@
             this.currentPagination.addClass("cur");
         },
 
-        _createPagination: function () {
+        _createPagination: function (options) {
             var _this = this;
-
-            var opts = this.options.pagination;
+            var opts = options.pagination;
             var ret = $(opts.elem);
             var children = this.paginations = $(opts.child, ret);
             this._setCurrentPagination(this.index);
