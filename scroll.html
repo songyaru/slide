@@ -74,7 +74,7 @@
     <ul class="slide-container">
         <li class="slide small"><img src="imgs/bg0.jpg" alt="0"/></li>
         <li class="slide median"><img src="imgs/bg1.jpg" alt="1"/></li>
-        <li class="slide cur"><img src="imgs/bg2.jpg" alt="2"/></li>
+        <li class="slide"><img src="imgs/bg2.jpg" alt="2"/></li>
         <li class="slide median"><img src="imgs/bg3.jpg" alt="3"/></li>
         <li class="slide small"><img src="imgs/bg4.jpg" alt="4"/></li>
         <li class="slide"><img src="imgs/bg5.jpg" alt="5"/></li>
@@ -85,9 +85,11 @@
 <script type="text/javascript">
     (function ($) {
 
-
         aa = $.slide({
 
+            slide:{
+                index:2
+            }
 
         }, $("#slide")[0]);
 

@@ -43,7 +43,7 @@
         init: noop,
         _create: function (options) {
             var _this = this,opts=options.slide;
-            this.container = $("." + pluginName + "-container", this.element);
+            this.container = $("." + pluginName + "-container", this.element); //todo  参数传入方式，可以是dom也可以是纯数据来拼接
             this.content = $("." + pluginName, this.container);
             this.length = this.content.length;
             this.index = opts.index;
