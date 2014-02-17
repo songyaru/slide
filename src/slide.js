@@ -24,8 +24,8 @@
     plugin.prototype = {
         options: {
             slide: {
-                index: 0,
-                currentClass: "cur"
+                index: 0, //显示第0个slide
+                currentClass: "cur" //当前显示的slide添加的className
             }
         },
         length: null,

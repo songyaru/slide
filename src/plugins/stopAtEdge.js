@@ -10,7 +10,7 @@
     var plugin = $[pluginName];
     var pluginImpl = {
         options: {
-            stopAtEdge: false
+            stopAtEdge: false //是否在边缘停止 （如：轮播到最后一张时不能继续点击向后）
         },
         _setControlUsable: function (index, lastIndex, maxIndex) {
             if (index == 0) {

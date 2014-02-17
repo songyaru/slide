@@ -6,13 +6,12 @@
     <link rel="stylesheet" href="css/base.css"/>
     <link rel="stylesheet" href="css/slide.css"/>
     <script type="text/javascript" src="src/util/jquery.js"></script>
-    <!--<script type="text/javascript" src="src/util/mod.js"></script>-->
     <script type="text/javascript" src="src/slide.js"></script>
-    <script type="text/javascript" src="src/control.js"></script>
-    <script type="text/javascript" src="src/pagination.js"></script>
-    <script type="text/javascript" src="src/util/autoPlay.js"></script>
-    <script type="text/javascript" src="src/util/animate.js"></script>
-    <script type="text/javascript" src="src/util/stopAtEdge.js"></script>
+    <script type="text/javascript" src="src/plugins/control.js"></script>
+    <script type="text/javascript" src="src/plugins/pagination.js"></script>
+    <script type="text/javascript" src="src/plugins/autoPlay.js"></script>
+    <script type="text/javascript" src="src/plugins/animate.js"></script>
+    <script type="text/javascript" src="src/plugins/stopAtEdge.js"></script>
 
 </head>
 <body>
@@ -51,7 +50,7 @@
                 index: 1
             },
             play: {
-                auto: false
+                auto: true
             },
             pagination: {
                 elem: $("#pagination"),

@@ -22,9 +22,9 @@
     var pluginImpl = {
         options: {
             animate: {
-                styles: "slide",//"fade","slide"
-                easing: "linear",
-                speed: 800
+                styles: "slide", //["fade"|"slide"]轮播动画类型
+                easing: "ease-in-out", //css3支持的animation-timing-function. (由于jQuery默认只提供"linear" 和 "swing",在不支持css3的浏览器，easing的参数不为linear时全部变为swing)
+                speed: 800 //动画持续时间
             }
         },
 
@@ -36,11 +36,13 @@
             if (vendorPrefix) {
                 this.container.css({
                     "transform": "translateX(" + value[1 - direct] + ")", //todo translateY
+                    "transitionTimingFunction": easing,
                     "transitionDuration": speed + "ms"
                 }).one("transitionend", function () {
-                        _this.animateDone(direct);
-                    });
+                    _this.animateDone(direct);
+                });
             } else {
+                easing = easing == "linear" ? "linear" : "swing";
                 this.container.animate({"left": value[1 - direct]}, speed, easing, function () {
                     _this.animateDone(direct);
                 });
@@ -64,9 +66,9 @@
             this._isAnimate = true;
             var animateOpts = this.options.animate;
             var animStyle = animateOpts.styles;
-            if (animStyle == "slide" || animStyle == "fade") {
-                this[animStyle](direct, animateOpts.speed, animateOpts.easing);
-            }
+//            if (animStyle == "slide" || animStyle == "fade") {
+            this[animStyle](direct, animateOpts.speed, animateOpts.easing);
+//            }
         },
         animateDone: function (direct) {
             var currentClassName = this.options.slide.currentClass;

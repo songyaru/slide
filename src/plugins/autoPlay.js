@@ -10,10 +10,10 @@
     var pluginImpl = {
         options: {
             play: {
-                reverse: false, //反向播放
-                auto: true,
-                pause: true,//鼠标移动到slide可以暂停自动播放
-                delay: 3000
+                reverse: false, //反向播放,默认播放顺序是从左到右
+                auto: true, //是否自动播放
+                pause: true, //鼠标移动到slide可以暂停自动播放
+                delay: 3000 //自动播放延迟
             }
         },
         play: function (reverse) {

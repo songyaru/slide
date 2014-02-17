@@ -11,10 +11,10 @@
     var pluginImpl = {
         options: {
             control: {
-                left: ".control-left",
-                right: ".control-right",
-                disableClass: "control-disable",
-                type: "click"
+                left: ".control-left",  //jQuery选择器或者dom元素，表示左边的控制按钮的节点  $(opts.left)
+                right: ".control-right", //同上，右边的控制按钮
+                disableClass: "control-disable", //按钮失效时添加的className （非循环轮播的情况下可以使用）
+                type: "click" //控制按钮注册的事件
             }
         },
         disableControl: function (type) {
