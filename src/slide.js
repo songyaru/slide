@@ -25,7 +25,9 @@
         options: {
             slide: {
                 index: 0, //显示第0个slide
-                currentClass: "cur" //当前显示的slide添加的className
+                currentClass: "cur", //当前显示的slide添加的className
+                container: ".slide-container", //包含所有slide的父节点  jQuery选择器或者dom元素 $(opts.container, this.element)
+                content: ".slide" //所有slide节点  jQuery选择器或者dom元素 $(opts.content, this.container)
             }
         },
         length: null,
@@ -42,9 +44,9 @@
         _getCreateOptions: noop,
         init: noop,
         _create: function (options) {
-            var _this = this,opts=options.slide;
-            this.container = $("." + pluginName + "-container", this.element); //todo  参数传入方式，可以是dom也可以是纯数据来拼接
-            this.content = $("." + pluginName, this.container);
+            var _this = this, opts = options.slide;
+            this.container = $(opts.container, this.element);
+            this.content = $(opts.content, this.container);
             this.length = this.content.length;
             this.index = opts.index;
             this.last = this.current = this.getItemByIndex(this.index);

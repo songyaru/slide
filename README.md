@@ -39,7 +39,7 @@ slide
 <pre>
 用法1：$(elem).slide(options);
 用法2：var obj=$.slide(options,elem);
-其中elem表示一个jQuery选择器或dom元素。
+其中elem必选，表示组件的容器，是一个jQuery选择器或dom元素。
 options见参数说明，参数都有默认值，可以不写
 
 //example:
@@ -62,15 +62,17 @@ var mySlide= $.slide({
 <pre>
 slide: {
     index: 0, //显示第0个slide
-    currentClass: "cur" //当前显示的slide添加的className
+    currentClass: "cur", //当前显示的slide添加的className
+    container: ".slide-container", //包含所有slide的父节点  jQuery选择器或者dom元素 $(opts.container, this.element)
+    content: ".slide" //所有slide节点  jQuery选择器或者dom元素 $(opts.content, this.container)
 }
 </pre>
 
 ###pagination
 <pre>
 pagination: {
-    elem: ".pagination", //jQuery选择器或者dom元素，表示包含pagination的父节点  $(opts.elem)
-    child: "li", //jQuery选择器,在父节点下找到所有pagination  $(opts.child, 父节点)
+    elem: ".pagination", //包含pagination的父节点 jQuery选择器或者dom元素 $(opts.elem)
+    child: "li", //所有pagination节点  jQuery选择器或者dom元素  $(opts.child, 父节点)
     currentClass: "cur", //当前显示的pagination添加的className
     type: "click"//["click"|"mousemove"] pagination父节点上冒泡监听的事件类型
 }
@@ -79,10 +81,10 @@ pagination: {
 ###control
 <pre>
 control: {
-     left: ".control-left",  //jQuery选择器或者dom元素，表示左边的控制按钮的节点  $(opts.left)
+     left: ".control-left",  //左边的控制按钮的节点 jQuery选择器或者dom元素  $(opts.left)
      right: ".control-right", //同上，右边的控制按钮
      disableClass: "control-disable", //按钮失效时添加的className （非循环轮播的情况下可以使用）
-     type: "click" //控制按钮注册的事件
+     type: "click" //控制按钮监听的事件
  }
 </pre>
 
