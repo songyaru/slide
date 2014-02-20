@@ -16,12 +16,11 @@
                 delay: 3000 //自动播放延迟
             }
         },
-        play: function (reverse) {
-            var _this = this;
-            var opts = this.options.play;
-            clearInterval(this.autoPlayTimer);
-            this.autoPlayTimer = setInterval(function () {
-                reverse ? _this.prev() : _this.next();
+        _autoPlayTimer: null,
+        play: function () {
+            var _this = this, opts = this.options.play;
+            this._autoPlayTimer = setTimeout(function () {
+                opts.reverse ? _this.prev() : _this.next();
             }, opts.delay);
         },
         pause: function () {
@@ -29,17 +28,24 @@
             this.container.hover(function () {
                 _this.stop();
             }, function () {
-                _this.play(_this.options.play.reverse);
+                _this.play();
             });
         },
         stop: function () {
-            clearInterval(this.autoPlayTimer);
+            clearTimeout(this._autoPlayTimer);
         },
         _createPlay: function (options) {
+            var _this = this;
             var opts = options.play;
             if (opts.auto) {
-                this.play(opts.reverse);
                 opts.pause && this.pause();
+
+                this.element.on("ui_jump", function () {
+                    _this.stop();
+                    _this.play();
+                });
+
+                this.play();
             }
         }
     };
