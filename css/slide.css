@@ -40,6 +40,7 @@
 
 #pagination li{
     float: left;
+    cursor: pointer;
 }
 
 #pagination li img{

@@ -1,0 +1,32 @@
+#tabsNav{
+margin: 10px;
+}
+#tabsNav li{
+
+    float: left;
+
+    background: #e6e6e6 ;
+    padding: 5px 20px;
+    color: #555555;
+    white-space: nowrap;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+#tabsNav li.cur{
+    background: #fff ;
+    font-weight: bold;
+}
+
+#tabs{
+    clear: both;
+    padding: 10px;
+}
+
+#tabs .tab-container>div{
+    display: none;
+}
+
+#tabs .tab-container .cur{
+    display: block;
+}

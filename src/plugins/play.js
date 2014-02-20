@@ -35,7 +35,7 @@
         stop: function () {
             clearInterval(this.autoPlayTimer);
         },
-        _createAutoPlay: function (options) {
+        _createPlay: function (options) {
             var opts = options.play;
             if (opts.auto) {
                 this.play(opts.reverse);

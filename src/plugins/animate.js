@@ -80,6 +80,7 @@
         },
         _createAnimate: function (options) {
             var _this = this;
+            this._changCurrentClass= $.noop;//默认更改样式要改下
             this.element.on("ui_jump", function (e, data) {
                 _this.animate(data.direct)
             })

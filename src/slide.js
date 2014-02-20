@@ -52,14 +52,22 @@
             this.last = this.current = this.getItemByIndex(this.index);
             this.current.addClass(opts.currentClass);
 
-            //引入_createXXX的插件
+            //引入插件初始化
             for (var name in this) {
                 name.replace(/^(?:_create)(\w+)/g, function (match, str) {
                     var fn = _this[match];
                     if ($.isFunction(fn)) {
+                        var optionsName = str.replace(/^(\w)/, function (m, s) {
+                            return s.toLowerCase();//首字母小写处理
+                        });
+                        //打包合并文件后引入了这个插件，但项目中又不需要，提供参数置空可以不初始化
+                        //todo更好的方案？？？
+                        if (options[optionsName] == undefined) {
+                            return;
+                        }
                         var ret = fn.call(_this, options);
                         if (ret !== undefined) {
-                            _this[str.toLowerCase()] = ret;
+                            _this[optionsName] = ret; //初始化的时候如果有返回值，将其挂载到组件.参数名下
                         }
                     }
                 })
@@ -77,9 +85,14 @@
         prev: function () {
             this.jump(this.index - 1);
         },
+        _changCurrentClass:function(opts){
+            this.last.removeClass(opts.currentClass);
+            this.current.addClass(opts.currentClass);
+        },
         jump: function (index) {
+            var opts = this.options.slide;
             var lastIndex = this.index;//上一次位置
-            if (lastIndex == index || this._isAnimate) {//动画的时候不能再继续jump todo 是否要这个限制？？
+            if (lastIndex == index || this._isAnimate) {//todo 是否要这个限制？？ 动画的时候不能再继续jump
                 return;
             }
             var direct = lastIndex < index ? 1 : -1; //direct=1, 正向（显示右边的dom元素，自右向左滚动）
@@ -87,11 +100,18 @@
             this.last = this.current;
             this.current = this.getItemByIndex(this.index);
 
+            this._changCurrentClass(opts);
+
             this.element.trigger("ui_jump", {
                 direct: direct,
                 lastIndex: lastIndex,
                 index: this.index
             });
+
+
+
+
+
         }
     };
 
