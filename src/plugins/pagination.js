@@ -36,8 +36,8 @@
             var children = this.paginations = $(opts.child, ret);
             this._setCurrentPagination(this.index);
 
-            ret.on(opts.type, opts.child, function (e) {
-                var i = children.index(e.currentTarget);
+            ret.on(opts.type, opts.child, function () {
+                var i = children.index(this);
                 _this.jump(i);
             });
 

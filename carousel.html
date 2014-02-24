@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>slideJS demo</title>
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" href="css/base.css"/>
+
+    <script type="text/javascript" src="src/util/jquery.js"></script>
+    <script type="text/javascript" src="src/slide.js"></script>
+    <script type="text/javascript" src="src/plugins/control.js"></script>
+    <script type="text/javascript" src="src/plugins/animate.js"></script>
+    <script type="text/javascript" src="src/util/animate-carousel.js"></script>
+
+
+    <style type="text/css">
+        #slide {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+
+            top: 50%;
+            left: 50%;
+            margin: -150px 0 0 -480px;
+            background-color: #272b2e;
+            width: 960px;
+        }
+
+        .slide-container {
+            width: 880px;
+            height: 180px;
+            overflow: hidden;
+            position: absolute;
+            bottom: 50px;
+            left: 40px;
+        }
+
+        .slide-container .slide {
+            overflow: hidden;
+            /*display: none;*/
+            position: absolute;
+            margin-left: 50%;
+
+            width: 0;
+            height: 0;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div id="slide">
+    <ul class="slide-container">
+        <li class="slide"><img src="imgs/bg0.jpg" alt="0" height="160"/></li>
+        <li class="slide"><img src="imgs/bg1.jpg" alt="1" height="160"/></li>
+        <li class="slide"><img src="imgs/bg2.jpg" alt="2"/></li>
+        <li class="slide"><img src="imgs/bg3.jpg" alt="3" height="160"/></li>
+        <li class="slide"><img src="imgs/bg4.jpg" alt="4" height="160"/></li>
+        <li class="slide"><img src="imgs/bg5.jpg" alt="5" height="160"/></li>
+    </ul>
+</div>
+
+<div id="control">
+    <a href="javascript:void(0);" class="control-left">《</a>
+    <a href="javascript:void(0);" class="control-right">》</a>
+</div>
+
+<script type="text/javascript">
+    (function ($) {
+
+        aa = $.slide({
+
+            slide: {
+                index: 0
+            }
+
+        }, $("#slide")[0]);
+
+
+        document.body.onkeydown = function (e) {
+            switch (e.keyCode) {
+
+                case 39://右键
+                    aa.next();
+                    break;
+                case 37://左键
+                    aa.prev();
+
+                    break;
+            }
+
+
+        }
+    })(jQuery);
+
+
+</script>
+</body>
+</html>

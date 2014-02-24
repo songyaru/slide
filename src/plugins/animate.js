@@ -39,14 +39,22 @@
                     "transitionTimingFunction": easing,
                     "transitionDuration": speed + "ms"
                 }).one("transitionend", function () {
-                    _this.animateDone(direct);
+                    _this._slideDone(direct);
                 });
             } else {
                 easing = easing == "linear" ? "linear" : "swing";
                 this.container.animate({"left": value[1 - direct]}, speed, easing, function () {
-                    _this.animateDone(direct);
+                    _this._slideDone(direct);
                 });
             }
+        },
+        _slideDone: function (direct) {
+            var currentClassName = this.options.slide.currentClass;
+            this.container.removeAttr("style");//todo 默认style
+            this.last.removeClass(currentClassName).hide();
+            this.current.addClass(currentClassName).css("left", 0).show();
+            this._isAnimate = false;
+            this.element.trigger("ui_slide_done");//todo 统一动画完成事件
         },
 
         fade: function (direct, speed) {
@@ -55,32 +63,27 @@
             var currentClassName = this.options.slide.currentClass;
             this.last.fadeOut(speed, function () {
                 _this.last.removeClass(currentClassName);
-                _this._isAnimate = --flag;
+                _this._fadeDone(--flag);
             });
             this.current.fadeIn(speed, function () {
                 _this.current.addClass(currentClassName);
-                _this._isAnimate = --flag;
+                _this._fadeDone(--flag);
             });
+        },
+        _fadeDone: function (flag) {
+            if (flag == 0) {
+                this._isAnimate = false;
+                this.element.trigger("ui_fade_done");//todo 统一动画完成事件
+            }
         },
         animate: function (direct) {
             this._isAnimate = true;
-            var animateOpts = this.options.animate;
-            var animStyle = animateOpts.styles;
-//            if (animStyle == "slide" || animStyle == "fade") {
-            this[animStyle](direct, animateOpts.speed, animateOpts.easing);
-//            }
-        },
-        animateDone: function (direct) {
-            var currentClassName = this.options.slide.currentClass;
-            this.container[0].style.cssText = "";//todo 默认style
-            this.last.removeClass(currentClassName).hide();
-            this.current.addClass(currentClassName).css("left", 0).show();
-            this._isAnimate = false;
-            this.element.trigger("ui_animate_done");
+            var opts = this.options.animate;
+            this[opts.styles](direct, opts.speed, opts.easing);
         },
         _createAnimate: function (options) {
             var _this = this;
-            this._changCurrentClass= $.noop;//默认更改样式要改下
+            this._changCurrentClass = $.noop;//默认更改样式要改下
             this.element.on("ui_jump", function (e, data) {
                 _this.animate(data.direct)
             })

@@ -36,17 +36,24 @@
         current: null,
         _setIndex: function (i) {
             this.lastIndex = this.index;
-            this.index = i % this.length;
+            this.index = (this.length + i) % this.length;
         },
-        _getIndex: function () {
-            return this.index;
-        },
+//        _getIndex: function () {
+//            return this.index;
+//        },
         _getCreateOptions: noop,
         init: noop,
+//        _setAttributeIndex: function (elems) {
+//            for (var i = 0, len = elems.length; i < len; i++) {
+//                elems[i].setAttribute("data-index", i);
+//            }
+//        },
+
         _create: function (options) {
             var _this = this, opts = options.slide;
             this.container = $(opts.container, this.element);
             this.content = $(opts.content, this.container);
+//            this._setAttributeIndex(this.content);
             this.length = this.content.length;
             this.index = opts.index;
             this.last = this.current = this.getItemByIndex(this.index);
@@ -77,15 +84,21 @@
             this.init(options);
         },
         getItemByIndex: function (i) {
-            return this.content.eq(i);
+            return this.content.eq(i % this.length);
         },
-        next: function () {
-            this.jump(this.index + 1);
+        next: function (step) {
+            if (step == undefined) {
+                step = 1;
+            }
+            this.jump(this.index + step);
         },
-        prev: function () {
-            this.jump(this.index - 1);
+        prev: function (step) {
+            if (step == undefined) {
+                step = 1;
+            }
+            this.jump(this.index - step);
         },
-        _changCurrentClass:function(opts){
+        _changCurrentClass: function (opts) {
             this.last.removeClass(opts.currentClass);
             this.current.addClass(opts.currentClass);
         },
@@ -107,9 +120,6 @@
                 lastIndex: lastIndex,
                 index: this.index
             });
-
-
-
 
 
         }
