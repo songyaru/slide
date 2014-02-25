@@ -22,16 +22,19 @@
     var pluginImpl = {
         options: {
             animate: {
+                currentClass: "cur", //当前显示的slide添加的className,
                 styles: "slide", //["fade"|"slide"]轮播动画类型
                 easing: "ease-in-out", //css3支持的animation-timing-function. (由于jQuery默认只提供"linear" 和 "swing",在不支持css3的浏览器，easing的参数不为linear时全部变为swing)
                 speed: 800 //动画持续时间
+            },
+            slide: {
+                _needChangeClass: false
             }
         },
 
-        slide: function (direct, speed, easing) {
-            var _this = this;
+        slide: function (direct, opts) {
+            var _this = this, speed = opts.speed, easing = opts.easing;
             var value = [ "-100%" , "0", "100%"];
-
             this.current.css("left", value[1 + direct]).show();
             if (vendorPrefix) {
                 this.container.css({
@@ -49,16 +52,16 @@
             }
         },
         _slideDone: function (direct) {
-            var currentClassName = this.options.slide.currentClass;
+            this._changCurrentClass();
             this.container.removeAttr("style");//todo 默认style
-            this.last.removeClass(currentClassName).hide();
-            this.current.addClass(currentClassName).css("left", 0).show();
+            this.last.hide();
+            this.current.css("left", 0).show();
             this._isAnimate = false;
             this.element.trigger("ui_slide_done");//todo 统一动画完成事件
         },
 
-        fade: function (direct, speed) {
-            var _this = this;
+        fade: function (direct, opts) {
+            var _this = this, speed = opts.speed;
             var flag = 2;
             var currentClassName = this.options.slide.currentClass;
             this.last.fadeOut(speed, function () {
@@ -76,16 +79,21 @@
                 this.element.trigger("ui_fade_done");//todo 统一动画完成事件
             }
         },
-        animate: function (direct) {
+        animate: function (direct, step) {
             this._isAnimate = true;
             var opts = this.options.animate;
-            this[opts.styles](direct, opts.speed, opts.easing);
+            opts.step = step;
+            this[opts.styles](direct, opts);
         },
+
         _createAnimate: function (options) {
             var _this = this;
-            this._changCurrentClass = $.noop;//默认更改样式要改下
+            this.current.addClass(options.slide.currentClass);
+
+            this.supportCss3 = vendorPrefix;
+
             this.element.on("ui_jump", function (e, data) {
-                _this.animate(data.direct)
+                _this.animate(data.direct, data.step)
             })
         }
     };
