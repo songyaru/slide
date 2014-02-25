@@ -23,11 +23,11 @@
             left: 50%;
             margin: -150px 0 0 -480px;
             background-color: #272b2e;
-            width: 960px;
+            width: 1060px;
         }
 
         .slide-container {
-            width: 880px;
+            width: 980px;
             height: 180px;
             overflow: hidden;
             position: absolute;
@@ -59,7 +59,9 @@
         <li class="slide"><img src="imgs/bg4.jpg" alt="4" height="160"/></li>
         <li class="slide"><img src="imgs/bg5.jpg" alt="5" height="160"/></li>
         <li class="slide"><img src="imgs/bg6.jpg" alt="6" height="160"/></li>
-
+        <li class="slide"><img src="imgs/bg7.jpg" alt="7"/></li>
+        <li class="slide"><img src="imgs/bg8.jpg" alt="7"/></li>
+        <li class="slide"><img src="imgs/bg9.jpg" alt="7"/></li>
     </ul>
 </div>
 
@@ -75,6 +77,19 @@
 
             slide: {
                 index: 3
+            },
+            carousel: {
+                max: 7,//一行同时显示的slide数 必须为奇数
+                info: {
+                    size: [
+                        {w: 70, h: 40},//小中大三种slide的尺寸 从左到右
+                        {w: 180, h: 80},//小中大三种slide的尺寸 从左到右
+                        {w: 260, h: 120},
+                        {w: 340, h: 160}
+                    ],
+                    len: [20, 60, 100], //表示slide隐藏的长度 从左到右
+                    top: [80, 60, 30, 10]//表示slide距离父容器顶部的距离
+                }
             }
 
         }, $("#slide")[0]);

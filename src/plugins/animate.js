@@ -88,7 +88,6 @@
 
         _createAnimate: function (options) {
             var _this = this;
-            this.current.addClass(options.slide.currentClass);
 
             this.supportCss3 = vendorPrefix;
 

@@ -18,11 +18,11 @@
                 max: 5,//一行同时显示的slide数 必须为奇数
                 info: {
                     size: [
-                        {w: 170, h: 80},//小中大三种slide的尺寸 从左到右
+                        {w: 180, h: 80},//小中大三种slide的尺寸 从左到右
                         {w: 260, h: 120},
                         {w: 340, h: 160}
                     ],
-                    len: [60, 100], //表示slide隐藏的长度 从左到右
+                    len: [ 60, 100], //表示slide隐藏的长度 从左到右
                     top: [60, 30, 10]//表示slide距离父容器顶部的距离
                 }
             }
@@ -32,27 +32,28 @@
             var step = options.step; //步长
             var flag = opts.max + step;//dom元素动画
 
+            var mid = opts.mid;
 
             this._changCurrentClass();
 
             var lastIndex = this.lastIndex;
             var loop = step;
-            var resetCss = opts.resetCss,rLeft=Math.abs(parseInt(resetCss.left));
+            var resetCss = opts.resetCss, rLeft = Math.abs(parseInt(resetCss.left));
             while (loop--) {
                 //todo 最后一个右边的slde有可能是第一个（slide个数不够），动画是可能出现从最左边飞到最右边。
                 //todo 因此要求step=1时 至少要有6张slide，step=2时 至少要有7张slide
-                resetCss.left = rLeft * direct+"px";
-                this.getItemByIndex(lastIndex + (3 + loop) * direct).css(resetCss); //正向(direct=1,从右向左的时候)，最后一个右边的slide
+                resetCss.left = rLeft * direct + "px";
+                this.getItemByIndex(lastIndex + (mid + 1 + loop) * direct).css(resetCss); //正向(direct=1,从右向左的时候)，最后一个右边的slide
 
-                resetCss.left = -rLeft * direct+"px";
-                this.getItemByIndex(lastIndex - (2 - loop) * direct).css("zIndex", 0).animate(resetCss, speed,function () {//第一个slide
+                resetCss.left = -rLeft * direct + "px";
+                this.getItemByIndex(lastIndex - (mid - loop) * direct).css("zIndex", 0).animate(resetCss, speed, function () {//第一个slide
                     this.style.cssText = "";
                     _this._carouselDone(--flag);
                 });
             }
 
             for (var i = step * direct; i < opts.max + step * direct; i++) {
-                this.getItemByIndex(lastIndex - 2 + i).css("zIndex", opts.css[i - step * direct].zIndex).animate(opts.css[i - step * direct], speed,function () {
+                this.getItemByIndex(lastIndex - mid + i).css("zIndex", opts.css[i - step * direct].zIndex).animate(opts.css[i - step * direct], speed, function () {
                     _this._carouselDone(--flag);
                 });
             }
@@ -85,8 +86,8 @@
                 var left = midHalfWidth;
                 if (i > mid) {
                     left -= opts.info.len[mid - 1];
-                    for (; mid - j > 1; j++) {
-                        left += opts.info.size[mid - j - 1].w - opts.info.len[mid - j - 2];
+                    for (var k = 0; mid - j - k > 1; k++) {
+                        left += opts.info.size[mid - k - 1].w - opts.info.len[mid - k - 2];
                     }
                 } else { //i<=mid
                     for (; j < mid; j++) {
@@ -96,7 +97,7 @@
                 }
                 opts.css[i].left = left + "px";
 
-                this.getItemByIndex(i - 2 + this.index).css(opts.css[i]);
+                this.getItemByIndex(i - mid + this.index).css(opts.css[i]);
             }
 
             var restLeft = midHalfWidth;
@@ -110,7 +111,7 @@
                 left: restLeft + "px",
                 zIndex: 0
             };
-
+            opts.mid = mid;
             var contents = this.content;
             this.container.on("click", slideOpts.content, function () {
                 var index = contents.index(this);
