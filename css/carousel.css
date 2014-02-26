@@ -1,0 +1,27 @@
+#slide {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -480px;
+    background-color: #272b2e;
+    width: 960px;
+}
+
+.slide-container {
+    width: 880px;
+    height: 180px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 50px;
+    left: 40px;
+}
+
+.slide-container .slide {
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    width: 0;
+    height: 0;
+}
