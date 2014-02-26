@@ -88,20 +88,13 @@
 
         _createAnimate: function (options) {
             var _this = this;
-
             this.supportCss3 = vendorPrefix;
-
             this.element.on("ui_jump", function (e, data) {
                 _this.animate(data.direct, data.step)
-            })
+            });
         }
     };
 
     var plugin = $[pluginName];
     plugin._extend(pluginImpl);
-
-//    require.async("slide", function (plugin) {
-//        $.extend(plugin.prototype, pluginImpl);
-//    });
-
 })(jQuery);

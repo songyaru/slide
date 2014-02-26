@@ -107,16 +107,63 @@ play: {
  }
 </pre>
 
-###其他参数
+##插件说明
+###stop-at-edge.js 轮播到最后一张时不能继续向后
 <pre>
-stopAtEdge: false //是否在边缘停止 （如：轮播到最后一张时不能继续点击向后）
+options: {
+    stopAtEdge: false //是否在边缘停止 （如：轮播到最后一张时不能继续点击向后）
+}
+</pre>
+###animate-carousel.js  旋转木马的轮播效果
+<pre>
+options: {
+    animate: {
+        styles: "carousel"//定义动画类型
+    },
+     carousel: {
+        max: 5,//一行同时显示的slide数
+        info: {
+            size: [
+                {w: 180, h: 80},//小中大三种slide的尺寸 从左到右
+                {w: 260, h: 120},
+                {w: 340, h: 160}
+            ],
+            len: [60, 100], //表示slide隐藏的长度 从左到右
+            top: [60, 30, 10]//表示slide距离父容器顶部的距离
+        }
+    }
+}
 </pre>
 
-
 ##消息事件
+###ui_create
+####事件中的参数
+<pre>
+this.element.trigger("ui_create", options);//整个组件的参数
+</pre>
 ###ui_jump
-
-
+####事件中的参数
+<pre>
+this.element.trigger("ui_jump", {
+    direct: direct,//number (1/-1) slide轮播的方向（1代表正向,从右到左，-1相反）
+    step: step,//number (轮播的步长)
+    lastIndex: lastIndex,//number(轮播前的显示slide)
+    index:this.index //number (当前显示的slide)
+});
+</pre>
+###ui_control
+####事件中的参数
+<pre>
+this.element.trigger("ui_control", {
+    type: name,//"left","right"
+    elem: ret[name] // 按钮的元素
+});
+</pre>
+###ui\_carousel\_done | ui\_slide\_done | ui\_fade\_done
+####无参数
+<pre>
+this.element.trigger("ui_carousel_done"); //ui_carousel_done | ui_slide_done | ui_fade_done
+</pre>
 
 
 

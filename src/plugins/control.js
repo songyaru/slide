@@ -34,8 +34,8 @@
                     }
                     i ? _this.next() : _this.prev();
                     _this.element.trigger("ui_control", {
-                        type: name,
-                        elem: ret[name]
+                        type: name,//"left","right"
+                        elem: ret[name] // 按钮的元素
                     });
                 });
             });
