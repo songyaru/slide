@@ -156,7 +156,7 @@ this.element.trigger("ui_jump", {
 <pre>
 this.element.trigger("ui_control", {
     type: name,//"left","right"
-    elem: ret[name] // 按钮的元素
+    elem: ret[name] // 按钮的dom元素
 });
 </pre>
 ###ui\_carousel\_done | ui\_slide\_done | ui\_fade\_done
