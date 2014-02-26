@@ -11,7 +11,8 @@
     var pluginImpl = {
         options: {
             animate: {
-                styles: "carousel", speed: 500 //动画持续时间
+                styles: "carousel",
+                easing: "ease-out"
             },
             carousel: {
                 max: 5,//一行同时显示的slide数 必须为奇数
@@ -64,23 +65,30 @@
                 }
             }
 
-            setTimeout(function () {
-                for (var i = step * direct; i < opts.max + step * direct; i++) {
-                    tmpSlide = _this.getItemByIndex(lastIndex - mid + i).css("z-index", opts.css[i - step * direct]["z-index"]);
-                    if (_this.supportCss3) {
-                        tmpSlide.css(opts.css[i - step * direct]).css({"transition": transitionStyle})
+            var tmpSlides = [];
+            for (var i = 0; i < opts.max; i++) {
+                tmpSlide = _this.getItemByIndex(lastIndex - mid + i + step * direct);
+                if (_this.supportCss3) {
+                    tmpSlides.push(tmpSlide);
+                }
+                else {
+                    tmpSlide.animate(opts.css[i], speed, function () {
+                        _this._carouselDone(--flag);
+                    });
+                }
+            }
+
+            //使用css3时，如果不设置延迟，那么line 48 隐藏的slide放在出场的位置将会失效 (ie/firefox 延迟设小了不生效，因此这里设置为50ms)
+            if (_this.supportCss3) {
+                setTimeout(function () {
+                    for (var i = 0; i < opts.max; i++) {
+                        tmpSlides[i].css(opts.css[i]).css({"transition": transitionStyle})
                             .one("transitionend", function () {
                                 _this._carouselDone(--flag);
                             });
                     }
-                    else {
-                        tmpSlide.animate(opts.css[i - step * direct], speed, function () {
-                            _this._carouselDone(--flag);
-                        });
-                    }
-                }
-            }, 50);//如果不设置延迟，那么line 48 隐藏的slide放在出场的位置将会失效 (ie/firefox 延迟设小了不生效，因此这里设置为50ms)
-
+                }, 50);
+            }
         },
         _carouselDone: function (flag) {
             if (flag == 0) {
@@ -118,7 +126,6 @@
                     mLeft = -mLeft;
                 }
                 opts.css[i]["margin-left"] = mLeft + "px";
-
                 this.getItemByIndex(i - mid + this.index).css(opts.css[i]);
             }
 

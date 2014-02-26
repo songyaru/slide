@@ -45,7 +45,6 @@
                     _this._slideDone(direct);
                 });
             } else {
-                easing = easing == "linear" ? "linear" : "swing";
                 this.container.animate({"left": value[1 - direct]}, speed, easing, function () {
                     _this._slideDone(direct);
                 });
@@ -89,6 +88,10 @@
         _createAnimate: function (options) {
             var _this = this;
             this.supportCss3 = vendorPrefix;
+            if (!vendorPrefix && options.animate.easing == "linear") {
+                //由于jQuery默认只提供"linear" 和 "swing",在不支持css3的浏览器，easing的参数不为linear时全部变为swing
+                options.animate.easing = "swing";
+            }
             this.element.on("ui_jump", function (e, data) {
                 _this.animate(data.direct, data.step)
             });
