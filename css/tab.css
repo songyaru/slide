@@ -1,0 +1,37 @@
+#tabsNav {
+    margin: 10px;
+    padding: 1px;
+    overflow: hidden;
+    min-width: 400px;
+}
+
+#tabsNav li {
+    float: left;
+    background: #e6e6e6;
+    padding: 5px 20px;
+    color: #555555;
+    white-space: nowrap;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+#tabsNav li.cur {
+    background: #fff;
+    font-weight: bold;
+    border: 1px solid;
+    margin-top: -1px;
+    border-bottom: 0;
+}
+
+#tabs {
+    clear: both;
+    padding: 10px;
+}
+
+#tabs .tab-container > div {
+    display: none;
+}
+
+#tabs .tab-container .cur {
+    display: block;
+}

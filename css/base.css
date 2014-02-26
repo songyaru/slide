@@ -1,0 +1,74 @@
+html,
+body,
+form,
+input,
+div,
+dd,
+dl,
+ul,
+ol,
+li,
+p,
+th,
+h1,
+h2,
+h3,
+h4,
+td{
+    margin:0;
+    padding:0;
+}
+
+article,
+aside,
+figure,
+footer,
+header,
+legend,
+nav,
+section{
+    display:block;
+}
+
+table{
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+ol, ul{
+    list-style:none;
+}
+
+img{
+    border:0;
+}
+
+html, body{
+    height:100%;
+}
+
+body{
+    font:14px/1.2 "Helvetica", "Arial", "sans-serif";
+}
+
+a,
+a:link,
+a:visited{
+    text-decoration:none;
+    outline:none;
+}
+
+.clear:after{
+    content:'.';
+    display:block;
+    visibility:hidden;
+    height:0;
+    line-height:0;
+    font-size:0;
+    clear:both;
+}
+
+.clear{
+    /*clear:both;*/
+    zoom:1;
+}
