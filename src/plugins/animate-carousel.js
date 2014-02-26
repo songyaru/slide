@@ -72,7 +72,7 @@
                     tmpSlides.push(tmpSlide);
                 }
                 else {
-                    tmpSlide.animate(opts.css[i], speed, function () {
+                    tmpSlide.css({"z-index":opts.css[i]["z-index"]}).animate(opts.css[i], speed, function () {
                         _this._carouselDone(--flag);
                     });
                 }
@@ -168,15 +168,4 @@
                     return;
                 }
 
-                var isLeft = parseInt(this.style.marginLeft) < 0 ? -1 : 1;//点击位置在左侧  todo 此处和css耦合了
-                if (step * isLeft < 0) { //说明点击左边slide的index大于中间的index      或者右边的index小于中间的index
-                    step += isLeft * _this.length;
-                }
-
-                step > 0 ? _this.next(step) : _this.prev(-step);
-            });
-        }
-    };
-
-    plugin._extend(pluginImpl);
-})(jQuery);
+            
