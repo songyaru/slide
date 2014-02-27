@@ -92,13 +92,11 @@
         },
         _carouselDone: function (flag) {
             if (flag == 0) {
-                this._isAnimate = false;
-                this.element.trigger("ui_carousel_done");
+                this._triggerAnimateDone("carousel");
             }
         },
 
         _createCarousel: function (options) {
-            console.log("","   -options.animate.styles- ",  options.animate&&options.animate.styles);
             if (options.animate == undefined || options.animate.styles != "carousel") {
                 return;
             }

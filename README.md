@@ -21,7 +21,7 @@ slide
 
 - 不依赖JQ？adapter？消息？ *
 
-- 自由组合 , 合并打包 grunt 实现 *
+- 自由组合 , 合并打包 grunt 输出 *
 
 - destroy方法 *
 
@@ -47,8 +47,10 @@ slide
 <pre>
 用法1：$(elem).slide(options);
 用法2：var obj=$.slide(options,elem);
-其中elem必选，表示组件的容器，是一个jQuery选择器或dom元素。
-options见参数说明，参数都有默认值，可以不写
+其中 elem 必选，表示组件的容器，是一个jQuery选择器或dom元素。
+options 见参数说明，参数都有默认值，可以不写
+*注意，如果打包合并文件引入了插件，但又不需要这个插件的功能，可以通过设置参数为null关闭插件
+如不需要自动轮播，可以设置参数 play: null
 
 //example:
 var mySlide= $.slide({

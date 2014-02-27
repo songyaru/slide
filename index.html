@@ -43,7 +43,7 @@
 <script type="text/javascript">
     (function ($) {
 
-        aa = $.slide({
+        var aa = $.slide({
 
             slide: {
                 index: 1
@@ -58,6 +58,9 @@
             stopAtEdge: true
         }, $("#slide"));
 
+        aa.element.on("ui_slide_done",function(e,data){
+            document.title="current slide: "+(data.index+1);
+        });
 
 //        $("#slide").slide({
 //            control: $("#control")
