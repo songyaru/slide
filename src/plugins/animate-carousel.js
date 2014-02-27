@@ -72,7 +72,7 @@
                     tmpSlides.push(tmpSlide);
                 }
                 else {
-                    tmpSlide.css({"z-index":opts.css[i]["z-index"]}).animate(opts.css[i], speed, function () {
+                    tmpSlide.css({"z-index": opts.css[i]["z-index"]}).animate(opts.css[i], speed, function () {
                         _this._carouselDone(--flag);
                     });
                 }
@@ -98,6 +98,11 @@
         },
 
         _createCarousel: function (options) {
+            console.log("","   -options.animate.styles- ",  options.animate&&options.animate.styles);
+            if (options.animate == undefined || options.animate.styles != "carousel") {
+                return;
+            }
+            this._needChangeClass = false;
             var _this = this, opts = options.carousel, slideOpts = options.slide;
 
             //生成slide的样式信息

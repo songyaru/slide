@@ -26,9 +26,6 @@
                 styles: "slide", //["fade"|"slide"]轮播动画类型
                 easing: "ease-in-out", //css3支持的animation-timing-function. (由于jQuery默认只提供"linear" 和 "swing",在不支持css3的浏览器，easing的参数不为linear时全部变为swing)
                 speed: 800 //动画持续时间
-            },
-            slide: {
-                _needChangeClass: false
             }
         },
 
@@ -92,8 +89,10 @@
                 //由于jQuery默认只提供"linear" 和 "swing",在不支持css3的浏览器，easing的参数不为linear时全部变为swing
                 options.animate.easing = "swing";
             }
+            this._needChangeClass = false;
             this.element.on("ui_jump", function (e, data) {
-                _this.animate(data.direct, data.step)
+                _this.animate(data.direct, data.step);
+                return false;
             });
         }
     };

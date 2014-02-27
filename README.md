@@ -34,7 +34,15 @@ slide
  - 暂停的动作和动画会有冲突 timer方式需要优化 fixed
 
 ***
-# 文档  
+# 文档
+##demo
+1. [基础轮播](http://songyaru.github.io/slide/ "基础轮播")
+2. [轮播到边界停止](http://songyaru.github.io/slide/stop-at-edge.html "轮播到边界停止")
+3. [TAB组件](http://songyaru.github.io/slide/tab.html "TAB组件")
+4. [旋转木马轮播-5张](http://songyaru.github.io/slide/carousel.html "旋转木马轮播-5张")
+5. [旋转木马轮播-7张](http://songyaru.github.io/slide/carousel-7.html "旋转木马轮播-7张")
+6. [TAB+多轮播实例](http://songyaru.github.io/slide/multi-slide.html "TAB+多轮播实例")
+
 ##基本用法
 <pre>
 用法1：$(elem).slide(options);
