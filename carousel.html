@@ -13,7 +13,6 @@
     <script type="text/javascript" src="src/plugins/animate-carousel.js"></script>
 
 
-
 </head>
 <body>
 
@@ -48,6 +47,9 @@
 
         }, $("#carousel"));
 
+        aa.element.on("ui_carousel_done", function (e, data) {
+            document.title = "current slide: " + (data.index + 1);
+        });
 
         document.body.onkeydown = function (e) {
             switch (e.keyCode) {

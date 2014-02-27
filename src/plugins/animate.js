@@ -47,13 +47,21 @@
                 });
             }
         },
+        _triggerAnimateDone: function (name) {//todo 统一动画完成事件
+            this._isAnimate = false;
+            this.element.trigger("ui_" + name + "_done", {
+                current: this.current,
+                last: this.last,
+                lastIndex: this.lastIndex,
+                index: this.index
+            });
+        },
         _slideDone: function (direct) {
             this._changCurrentClass();
             this.container.removeAttr("style");//todo 默认style
             this.last.hide();
             this.current.css("left", 0).show();
-            this._isAnimate = false;
-            this.element.trigger("ui_slide_done");//todo 统一动画完成事件
+            this._triggerAnimateDone("slide");
         },
 
         fade: function (direct, opts) {
@@ -71,8 +79,7 @@
         },
         _fadeDone: function (flag) {
             if (flag == 0) {
-                this._isAnimate = false;
-                this.element.trigger("ui_fade_done");//todo 统一动画完成事件
+                this._triggerAnimateDone("fade");
             }
         },
         animate: function (direct, step) {
