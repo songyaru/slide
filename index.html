@@ -11,8 +11,6 @@
     <script type="text/javascript" src="src/plugins/pagination.js"></script>
     <script type="text/javascript" src="src/plugins/play.js"></script>
     <script type="text/javascript" src="src/plugins/animate.js"></script>
-    <script type="text/javascript" src="src/plugins/stop-at-edge.js"></script>
-
 </head>
 <body>
 
@@ -54,8 +52,7 @@
             pagination: {
                 elem: $("#pagination"),
                 type: "click"
-            },
-            stopAtEdge: true
+            }
         }, $("#slide"));
 
         aa.element.on("ui_slide_done",function(e,data){
