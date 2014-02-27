@@ -172,7 +172,12 @@ this.element.trigger("ui_control", {
 ###ui\_carousel\_done | ui\_slide\_done | ui\_fade\_done
 ####无参数
 <pre>
-this.element.trigger("ui_carousel_done"); //ui_carousel_done | ui_slide_done | ui_fade_done
+this.element.trigger("ui_carousel_done",{ //ui_carousel_done | ui_slide_done | ui_fade_done
+    current: this.current, //当前slide
+    last: this.last, //上次轮播的slide
+    lastIndex: this.lastIndex, //上次轮播的slide序号
+    index: this.index//当前slide序号
+});
 </pre>
 
 
