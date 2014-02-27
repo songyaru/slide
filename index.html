@@ -5,14 +5,13 @@
     <title>slideJS demo</title>
     <link rel="stylesheet" href="css/base.css"/>
     <link rel="stylesheet" href="css/slide.css"/>
+    <link rel="stylesheet" href="css/control.css"/>
     <script type="text/javascript" src="src/util/jquery.js"></script>
     <script type="text/javascript" src="src/slide.js"></script>
     <script type="text/javascript" src="src/plugins/control.js"></script>
     <script type="text/javascript" src="src/plugins/pagination.js"></script>
     <script type="text/javascript" src="src/plugins/play.js"></script>
     <script type="text/javascript" src="src/plugins/animate.js"></script>
-    <script type="text/javascript" src="src/plugins/stop-at-edge.js"></script>
-
 </head>
 <body>
 
@@ -54,8 +53,7 @@
             pagination: {
                 elem: $("#pagination"),
                 type: "click"
-            },
-            stopAtEdge: true
+            }
         }, $("#slide"));
 
         aa.element.on("ui_slide_done",function(e,data){

@@ -1,4 +1,4 @@
-#slide, #control {
+#slide{
     position: relative;
     width: 600px;
     height: 400px;
@@ -6,7 +6,7 @@
 
     top: 50%;
     left: 50%;
-    margin: -300px 0 0 -300px;
+    margin: -200px 0 0 -300px;
 }
 
 #slide .slide-container {
@@ -52,23 +52,4 @@
     border: 1px solid #f00;
 }
 
-#control {
-    overflow: visible;
-}
-
-.control-left {
-    position: absolute;
-    top: 50%;
-    left: -100px;
-}
-
-.control-right {
-    position: absolute;
-    top: 50%;
-    right: -100px;
-}
-
-.control-disable {
-    display: none;
-}
 
