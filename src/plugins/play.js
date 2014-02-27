@@ -43,6 +43,7 @@
                 this.element.on("ui_jump", function () {
                     _this.stop();
                     _this.play();
+                    return false;
                 });
 
                 this.play();

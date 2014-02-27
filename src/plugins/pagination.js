@@ -43,6 +43,7 @@
 
             this.element.on("ui_jump", function (e, data) {
                 _this.paginationChange(data);
+                return false; //不要冒泡，防止组件套组件的时候，子组件消息传递到父组件
             });
 
             return ret;

@@ -32,6 +32,7 @@
                 this._setControlUsable(this.index, this.lastIndex, maxIndex);
                 this.element.on("ui_jump", function (e, data) {
                     _this._setControlUsable(data.index, data.lastIndex, maxIndex);
+                    return false;
                 });
             }
         }

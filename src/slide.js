@@ -16,7 +16,7 @@
         }
 
         this.element = $(elem);
-        $.extend(true, this.options, this._getCreateOptions(), opts);
+        this.options = $.extend(true, {}, this.options, this._getCreateOptions(), opts);
         this._create(this.options);
         return this;
     };
@@ -27,12 +27,13 @@
                 index: 0, //显示第0个slide
                 currentClass: "cur", //当前显示的slide添加的className
                 container: ".slide-container", //包含所有slide的父节点  jQuery选择器或者dom元素 $(opts.container, this.element)
-                content: ".slide",  //所有slide节点  jQuery选择器或者dom元素 $(opts.content, this.container)
-                _needChangeClass: true //是否要在每次slide播放时改变slide的currentClass （组件二次开发的时候使用，如animate.js中设置为false，再在动画过程中去设置）
+                content: ".slide" //所有slide节点  jQuery选择器或者dom元素 $(opts.content, this.container)
+
             }
         },
         length: null,
         _isAnimate: false,
+        _needChangeClass: true, //是否要在每次slide播放时改变slide的currentClass （组件二次开发的时候使用，如animate.js中设置为false，再在动画过程中去设置）
         last: null,
         current: null,
         _setIndex: function (i) {
@@ -77,7 +78,7 @@
             this.last = this.current;
             this.current = this.getItemByIndex(this.index);
 
-            if (this.options.slide._needChangeClass) {
+            if (this._needChangeClass) {
                 this._changCurrentClass();
             }
             this.element.trigger("ui_jump", {
@@ -96,7 +97,6 @@
             this.index = opts.index;
             this.last = this.current = this.getItemByIndex(this.index);
             this.current.addClass(opts.currentClass);
-
 
             //引入插件初始化
             for (var name in this) {
