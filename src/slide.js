@@ -67,9 +67,13 @@
             this._changeClass(this.current, this.last, this.options.slide.currentClass);
         },
         jump: function (index, step) {
-//            var opts = this.options.slide;
+            if (this._isAnimate) {//todo 是否要这个限制？？ 动画的时候不能再继续jump
+                if (this.stopAnimate()==false) {
+                    return;
+                }
+            }
             var lastIndex = this.index;//上一次位置
-            if (lastIndex == index || this._isAnimate) {//todo 是否要这个限制？？ 动画的时候不能再继续jump
+            if (lastIndex == index) {
                 //lastIndex不做类似_setIndex中取余数的处理，是为了判断direct的方向
                 return;
             }

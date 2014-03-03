@@ -95,7 +95,8 @@
                 this._triggerAnimateDone("carousel");
             }
         },
-
+        _carouselStop: function () {//todo
+        },
         _createCarousel: function (options) {
             if (options.animate == undefined || options.animate.styles != "carousel") {
                 return;
