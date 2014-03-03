@@ -22,6 +22,7 @@
     var pluginImpl = {
         options: {
             animate: {
+                pca: true,//prevent continuous animation 阻止连续动画   todo 命名???
                 currentClass: "cur", //当前显示的slide添加的className,
                 styles: "slide", //["fade"|"slide"]轮播动画类型
                 easing: "ease-in-out", //css3支持的animation-timing-function. (由于jQuery默认只提供"linear" 和 "swing",在不支持css3的浏览器，easing的参数不为linear时全部变为swing)
@@ -63,32 +64,39 @@
             this.current.css("left", 0).show();
             this._triggerAnimateDone("slide");
         },
+        _slideStop: function () { //todo
+        },
 
         fade: function (direct, opts) {
             var _this = this, speed = opts.speed;
             var flag = 2;
-            var currentClassName = this.options.slide.currentClass;
             this.last.fadeOut(speed, function () {
-                _this.last.removeClass(currentClassName);
                 _this._fadeDone(--flag);
             });
             this.current.fadeIn(speed, function () {
-                _this.current.addClass(currentClassName);
                 _this._fadeDone(--flag);
             });
         },
         _fadeDone: function (flag) {
             if (flag == 0) {
+                this._changCurrentClass();
                 this._triggerAnimateDone("fade");
             }
+        },
+        _fadeStop: function () { //todo
         },
         animate: function (direct, step) {
             this._isAnimate = true;
             var opts = this.options.animate;
             opts.step = step;
             this[opts.styles](direct, opts);
+            if (!opts.pca) {
+                this.stopAnimate = this["_" + opts.styles + "Stop"];
+            }
         },
-
+        stopAnimate: function () { //阻止连续动画
+            return false;
+        },
         _createAnimate: function (options) {
             var _this = this;
             this.supportCss3 = vendorPrefix;

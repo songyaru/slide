@@ -19,6 +19,7 @@
 }
 
 #carousel .slide-container .slide {
+    cursor: pointer;
     overflow: hidden;
     position: absolute;
     left: 50%;
