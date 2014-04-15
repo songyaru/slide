@@ -169,8 +169,18 @@ this.element.trigger("ui_control", {
     elem: ret[name] // 按钮的dom元素
 });
 </pre>
+###ui\_carousel\_start | ui\_slide\_start | ui\_fade\_start
+####无参数 动画开始前触发
+<pre>
+this.element.trigger("ui_carousel_start",{ //ui_carousel_start | ui_slide_start | ui_fade_start
+    current: this.current, //当前slide
+    last: this.last, //上次轮播的slide
+    lastIndex: this.lastIndex, //上次轮播的slide序号
+    index: this.index//当前slide序号
+});
+</pre>
 ###ui\_carousel\_done | ui\_slide\_done | ui\_fade\_done
-####无参数
+####无参数 动画结束后触发
 <pre>
 this.element.trigger("ui_carousel_done",{ //ui_carousel_done | ui_slide_done | ui_fade_done
     current: this.current, //当前slide
