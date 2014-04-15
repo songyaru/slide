@@ -89,6 +89,12 @@
             this._isAnimate = true;
             var opts = this.options.animate;
             opts.step = step;
+            this.element.trigger("ui_"+opts.styles+"_start",{
+                current: this.current,
+                last: this.last,
+                lastIndex: this.lastIndex,
+                index: this.index
+            });
             this[opts.styles](direct, opts);
             if (!opts.pca) {
                 this.stopAnimate = this["_" + opts.styles + "Stop"];
