@@ -29,15 +29,20 @@
             this.currentPagination.addClass(this.options.pagination.currentClass);
         },
 
+        _updatePagination: function (options) {
+            var opts = options.pagination;
+            this.paginations = $(opts.child, $(opts.elem));
+        },
         _createPagination: function (options) {
+            this._updateFnArray.push(this._updatePagination); //更新pagination
             var _this = this;
             var opts = options.pagination;
             var ret = $(opts.elem);
-            var children = this.paginations = $(opts.child, ret);
+            this._updatePagination(options);
             this._setCurrentPagination(this.index);
 
             ret.on(opts.type, opts.child, function () {
-                var i = children.index(this);
+                var i = _this.paginations.index(this);
                 _this.jump(i);
             });
 

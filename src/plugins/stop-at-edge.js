@@ -28,10 +28,9 @@
         _createStopAtEdge: function (opts) {
             if (opts.stopAtEdge) {
                 var _this = this;
-                var maxIndex = _this.length - 1;
-                this._setControlUsable(this.index, this.lastIndex, maxIndex);
+                this._setControlUsable(this.index, this.lastIndex, _this.length - 1);
                 this.element.on("ui_jump", function (e, data) {
-                    _this._setControlUsable(data.index, data.lastIndex, maxIndex);
+                    _this._setControlUsable(data.index, data.lastIndex, _this.length - 1);
                     return false;
                 });
             }
