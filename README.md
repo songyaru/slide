@@ -42,6 +42,7 @@ slide
 4. [旋转木马轮播-5张](http://songyaru.github.io/slide/carousel.html "旋转木马轮播-5张")
 5. [旋转木马轮播-7张](http://songyaru.github.io/slide/carousel-7.html "旋转木马轮播-7张")
 6. [TAB+多轮播实例](http://songyaru.github.io/slide/multi-slide.html "TAB+多轮播实例")
+7. [初始化后插入slide](http://songyaru.github.io/slide/update.html "初始化后插入slide")
 
 ##基本用法
 <pre>
