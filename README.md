@@ -119,16 +119,14 @@ play: {
 
 ##方法
 ###update
-更新slide组件，如初始化后动态插入了slide，需要执行这个方法
 <pre>
+//更新slide组件，如初始化后动态插入了slide，需要执行这个方法
 for (var i = 0, len = this._updateFnArray.length; i < len; i++) {
     var fn = this._updateFnArray[i];
     fn.call(this, this.options);
 }
-</pre>
 
-插件中需要把更新方法push到_updateFnArray中，当执行update方法，也会自动的更新这些插件，如更新pagination：
-<pre>
+//插件中需要把更新方法push到_updateFnArray中，当执行update方法，也会自动的更新这些插件，如更新pagination：
  this._updateFnArray.push(this._updatePagination);
 </pre>
 
