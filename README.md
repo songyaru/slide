@@ -123,7 +123,7 @@ play: {
 ###update###
 更新slide组件，如初始化后动态插入了slide，需要执行这个方法
 
-*插件中需要把更新方法push到_updateFnArray中，当执行update方法，也会自动的更新这些插件，如更新pagination：
+*插件二次开发，需要把更新方法push到_updateFnArray中，当执行update方法，也会自动的更新这些插件，如pagination插件的更新：
 <pre>
  this._updateFnArray.push(this._updatePagination);
 </pre>
