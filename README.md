@@ -42,6 +42,7 @@ slide
 4. [旋转木马轮播-5张](http://songyaru.github.io/slide/carousel.html "旋转木马轮播-5张")
 5. [旋转木马轮播-7张](http://songyaru.github.io/slide/carousel-7.html "旋转木马轮播-7张")
 6. [TAB+多轮播实例](http://songyaru.github.io/slide/multi-slide.html "TAB+多轮播实例")
+7. [初始化后插入slide](http://songyaru.github.io/slide/update.html "初始化后插入slide")
 
 ##基本用法
 <pre>
@@ -117,6 +118,16 @@ play: {
  }
 </pre>
 
+
+##方法##
+###update###
+更新slide组件，如初始化后动态插入了slide，需要执行这个方法
+
+*插件中需要把更新方法push到_updateFnArray中，当执行update方法，也会自动的更新这些插件，如更新pagination：
+<pre>
+ this._updateFnArray.push(this._updatePagination);
+</pre>
+
 ##插件说明
 ###stop-at-edge.js 轮播到最后一张时不能继续向后
 <pre>
@@ -169,8 +180,18 @@ this.element.trigger("ui_control", {
     elem: ret[name] // 按钮的dom元素
 });
 </pre>
+###ui\_carousel\_start | ui\_slide\_start | ui\_fade\_start
+####无参数 动画开始前触发
+<pre>
+this.element.trigger("ui_carousel_start",{ //ui_carousel_start | ui_slide_start | ui_fade_start
+    current: this.current, //当前slide
+    last: this.last, //上次轮播的slide
+    lastIndex: this.lastIndex, //上次轮播的slide序号
+    index: this.index//当前slide序号
+});
+</pre>
 ###ui\_carousel\_done | ui\_slide\_done | ui\_fade\_done
-####无参数
+####无参数 动画结束后触发
 <pre>
 this.element.trigger("ui_carousel_done",{ //ui_carousel_done | ui_slide_done | ui_fade_done
     current: this.current, //当前slide

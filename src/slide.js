@@ -68,7 +68,7 @@
         },
         jump: function (index, step) {
             if (this._isAnimate) {//todo 是否要这个限制？？ 动画的时候不能再继续jump
-                if (this.stopAnimate()==false) {
+                if (this.stopAnimate() == false) {
                     return;
                 }
             }
@@ -93,11 +93,26 @@
             });
 
         },
-        _create: function (options) {
-            var _this = this, opts = options.slide;
+        /**
+         * 更新slide组件，如初始化后动态插入了slide，需要执行这个update方法
+         */
+        update: function () {
+            for (var i = 0, len = this._updateFnArray.length; i < len; i++) {
+                var fn = this._updateFnArray[i];
+                fn.call(this, this.options);
+            }
+        },
+        _updateSlide: function (options) {
+            var opts = options.slide;
             this.container = $(opts.container, this.element);
             this.content = $(opts.content, this.container);
             this.length = this.content.length;
+            console.log("","   -this.length- ", this.length );
+        },
+        _create: function (options) {
+            this._updateFnArray = [this._updateSlide];
+            var _this = this, opts = options.slide;
+            this._updateSlide(options);
             this.index = opts.index;
             this.last = this.current = this.getItemByIndex(this.index);
             this.current.addClass(opts.currentClass);
