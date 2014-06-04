@@ -29,7 +29,7 @@
             var ret = {};
             $.each(["left", "right"], function (i, name) {
                 ret[name] = $(opts[name]).on(opts.type, function () {
-                    if (ret[name].hasClass(opts.disableClass)) {
+                    if (ret[name].hasClass(opts.disableClass)) {//todo 此处不应该用class来判断是否可点击，多个轮播公用一个control的时候没有考虑到
                         return;
                     }
                     i ? _this.next() : _this.prev();
