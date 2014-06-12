@@ -37,8 +37,9 @@
         last: null,
         current: null,
         _setIndex: function (i) {
-            this.lastIndex = (this.length + this.index) % this.length;
-            this.index = (this.length + i) % this.length;
+            var len=this.length;
+            this.lastIndex = (len + this.index) % len;
+            this.index = (len + i) % len;
         },
         _getCreateOptions: noop,
         init: noop,
@@ -107,7 +108,6 @@
             this.container = $(opts.container, this.element);
             this.content = $(opts.content, this.container);
             this.length = this.content.length;
-            console.log("","   -this.length- ", this.length );
         },
         _create: function (options) {
             this._updateFnArray = [this._updateSlide];
@@ -139,7 +139,6 @@
             }
 
             this.element.trigger("ui_create", options);
-
             this.init(options);
         }
     };

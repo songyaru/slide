@@ -85,7 +85,7 @@ pagination: {
     elem: ".pagination", //包含pagination的父节点 jQuery选择器或者dom元素 $(opts.elem)
     child: "li", //所有pagination节点  jQuery选择器或者dom元素  $(opts.child, 父节点)
     currentClass: "cur", //当前显示的pagination添加的className
-    type: "click"//["click"|"mousemove"] pagination父节点上冒泡监听的事件类型
+    type: "click"//["click"|"mouseenter"|"mousemove"] pagination父节点上冒泡监听的事件类型,mousemove支持debounce功能(50ms)
 }
 </pre>
 

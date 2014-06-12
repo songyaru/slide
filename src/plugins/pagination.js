@@ -6,6 +6,32 @@
  */
 (function ($) {
     var pluginName = "slide";
+    var debounce = function (func, wait) {
+        var timeout, args, context, timestamp;
+
+        var now = Date.now || function () {
+            return new Date().getTime();
+        };
+        var later = function () {
+            var last = now() - timestamp;
+            if (last < wait) {
+                timeout = setTimeout(later, wait - last);
+            } else {
+                timeout = null;
+                func.apply(context, args);
+                context = args = null;
+            }
+        };
+
+        return function () {
+            context = this;
+            args = arguments;
+            timestamp = now();
+            if (!timeout) {
+                timeout = setTimeout(later, wait);
+            }
+        };
+    };
     var plugin = $[pluginName];
     var pluginImpl = {
         options: {
@@ -13,7 +39,7 @@
                 elem: ".pagination", //包含pagination的父节点 jQuery选择器或者dom元素 $(opts.elem)
                 child: "li", //所有pagination节点  jQuery选择器或者dom元素  $(opts.child, 父节点)
                 currentClass: "cur", //当前显示的pagination添加的className
-                type: "click"//["click"|"mousemove"] pagination父节点上冒泡监听的事件类型
+                type: "click"//["click"|"mouseenter"|"mousemove"] pagination父节点上冒泡监听的事件类型,mousemove支持debounce功能(50ms)
             }
         },
         paginationChange: function (data) {
@@ -41,9 +67,15 @@
             this._updatePagination(options);
             this._setCurrentPagination(this.index);
 
-            ret.on(opts.type, opts.child, function () {
+            var eventFn = function () {
                 var i = _this.paginations.index(this);
                 _this.jump(i);
+            };
+            if (opts.type == "mousemove") {
+                eventFn = debounce(eventFn, 50);
+            }
+            ret.on(opts.type, opts.child, function () {
+                eventFn.call(this);
             });
 
             this.element.on("ui_jump", function (e, data) {
