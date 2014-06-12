@@ -79,11 +79,14 @@
 
         aa.element.on("ui_jump", function (e, data) {
             if (data.index == 3) { //ajax
+                var ajaxTab=aa.content[data.index];
+                ajaxTab.innerHTML="waiting...";
                 $.get("src/slide.js", function (res) {
-                    aa.content[data.index].innerHTML = res;
+                    setTimeout(function(){
+                        ajaxTab.innerHTML = res;
+                    },1000);
                 });
             }
-
         });
 
 
