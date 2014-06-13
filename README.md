@@ -29,7 +29,7 @@ slide
 
 
 ### 问题 ###
- - mouseover 到 pagination 动画处理
+ - mouseover 到 pagination 动画处理 fixed
  - 连续动画的处理
  - 暂停的动作和动画会有冲突 timer方式需要优化 fixed
 
