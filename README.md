@@ -32,7 +32,7 @@ slide
 
 ***
 # 文档
-##demo
+## demo
 1. [基础轮播](http://songyaru.github.io/slide/ "基础轮播")
 2. [轮播到边界停止](http://songyaru.github.io/slide/stop-at-edge.html "轮播到边界停止")
 3. [TAB组件](http://songyaru.github.io/slide/tab.html "TAB组件")
@@ -41,7 +41,7 @@ slide
 6. [TAB+多轮播实例](http://songyaru.github.io/slide/multi-slide.html "TAB+多轮播实例")
 7. [初始化后插入slide](http://songyaru.github.io/slide/update.html "初始化后插入slide")
 
-##基本用法
+## 基本用法
 <pre>
 用法1：$(elem).slide(options);
 用法2：var obj=$.slide(options,elem);
@@ -65,8 +65,8 @@ var mySlide= $.slide({
     stopAtEdge: true
 }, $("#slide"));
 </pre>
-##参数说明
-###slide
+## 参数说明
+### slide
 <pre>
 slide: {
     index: 0, //显示第0个slide
@@ -76,7 +76,7 @@ slide: {
 }
 </pre>
 
-###pagination
+### pagination
 <pre>
 pagination: {
     elem: ".pagination", //包含pagination的父节点 jQuery选择器或者dom元素 $(opts.elem)
@@ -86,7 +86,7 @@ pagination: {
 }
 </pre>
 
-###control
+### control
 <pre>
 control: {
      left: ".control-left",  //左边的控制按钮的节点 jQuery选择器或者dom元素  $(opts.left)
@@ -96,7 +96,7 @@ control: {
  }
 </pre>
 
-###animate
+### animate
 <pre>
 animate: {
      styles: "slide", //["fade"|"slide"]轮播动画类型
@@ -105,7 +105,7 @@ animate: {
  }
 </pre>
 
-###play
+### play
 <pre>
 play: {
      reverse: false, //反向播放,默认播放顺序是从左到右
@@ -116,8 +116,9 @@ play: {
 </pre>
 
 
-##方法##
-###update###
+## 方法
+
+### update
 更新slide组件，如初始化后动态插入了slide，需要执行这个方法
 
 *插件二次开发，需要把更新方法push到_updateFnArray中，当执行update方法，也会自动的更新这些插件，如pagination插件的更新：
@@ -125,14 +126,15 @@ play: {
  this._updateFnArray.push(this._updatePagination);
 </pre>
 
-##插件说明
-###stop-at-edge.js 轮播到最后一张时不能继续向后
+## 插件说明
+
+### stop-at-edge.js 轮播到最后一张时不能继续向后
 <pre>
 options: {
     stopAtEdge: false //是否在边缘停止 （如：轮播到最后一张时不能继续点击向后）
 }
 </pre>
-###animate-carousel.js  旋转木马的轮播效果
+### animate-carousel.js  旋转木马的轮播效果
 <pre>
 options: {
     animate: {
@@ -153,14 +155,14 @@ options: {
 }
 </pre>
 
-##消息事件
-###ui_create
-####事件中的参数
+## 消息事件
+### ui_create
+#### 事件中的参数
 <pre>
 this.element.trigger("ui_create", options);//整个组件的参数
 </pre>
-###ui_jump
-####事件中的参数
+### ui_jump
+#### 事件中的参数
 <pre>
 this.element.trigger("ui_jump", {
     direct: direct,//number (1/-1) slide轮播的方向（1代表正向,从右到左，-1相反）
@@ -169,16 +171,16 @@ this.element.trigger("ui_jump", {
     index:this.index //number (当前显示的slide)
 });
 </pre>
-###ui_control
-####事件中的参数
+### ui_control
+#### 事件中的参数
 <pre>
 this.element.trigger("ui_control", {
     type: name,//"left","right"
     elem: ret[name] // 按钮的dom元素
 });
 </pre>
-###ui\_carousel\_start | ui\_slide\_start | ui\_fade\_start
-####无参数 动画开始前触发
+### ui\_carousel\_start | ui\_slide\_start | ui\_fade\_start
+#### 无参数 动画开始前触发
 <pre>
 this.element.trigger("ui_carousel_start",{ //ui_carousel_start | ui_slide_start | ui_fade_start
     current: this.current, //当前slide
@@ -187,8 +189,8 @@ this.element.trigger("ui_carousel_start",{ //ui_carousel_start | ui_slide_start 
     index: this.index//当前slide序号
 });
 </pre>
-###ui\_carousel\_done | ui\_slide\_done | ui\_fade\_done
-####无参数 动画结束后触发
+### ui\_carousel\_done | ui\_slide\_done | ui\_fade\_done
+#### 无参数 动画结束后触发
 <pre>
 this.element.trigger("ui_carousel_done",{ //ui_carousel_done | ui_slide_done | ui_fade_done
     current: this.current, //当前slide
